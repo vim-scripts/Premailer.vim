@@ -1,0 +1,9 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3699
+
+Vim wrapper plugin for the Ruby script Premailer.
+
+Homepage: http://designtomarkup.com/vim/work-with-external-css-tools#premailer.vim
+
+Git repository: https://github.com/kien/premailer.vim
+
+Usage: open a HTML page and run :Premailer to get the email-friendly version.
