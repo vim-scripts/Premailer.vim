@@ -1,3 +1,5 @@
+[Homepage][8]
+
 Requires Vim 7.3+ built with +ruby/dyn, Ruby and [Premailer][6].
 
 ## Usage
@@ -11,9 +13,9 @@ let g:premailer_options = {
 			\ 'line_length': 65,
 			\ 'link_query_string': '',
 			\ 'base_url': '',
-			\ 'remove_classes': 0,
-			\ 'remove_ids': 0,
-			\ 'remove_comments': 0,
+			\ 'remove_classes': 1,
+			\ 'remove_ids': 1,
+			\ 'remove_comments': 1,
 			\ 'css': [],
 			\ 'css_to_attributes': 1,
 			\ 'with_html_string': 0,
@@ -29,9 +31,9 @@ let g:premailer_options = {
 * `g:premailer_options['css']` Manually specify a CSS stylesheet.
 * `g:premailer_options['css_to_attributes']` Copy related CSS attributes into HTML attributes (e.g. `background-color` to `bgcolor`)
 * `g:premailer_options['css_string']` Pass CSS as a string
-* `g:premailer_options['remove_ids']` Remove ID attributes whenever possible and convert IDs used as anchors to hashed to avoid collisions in webmail programs.  Default is 0.
-* `g:premailer_options['remove_classes']` Remove class attributes. Default is 0.
-* `g:premailer_options['remove_comments']` Remove html comments. Default is 0.
+* `g:premailer_options['remove_ids']` Remove ID attributes whenever possible and convert IDs used as anchors to hashed to avoid collisions in webmail programs.  Default is 1.
+* `g:premailer_options['remove_classes']` Remove class attributes. Default is 1.
+* `g:premailer_options['remove_comments']` Remove html comments. Default is 1.
 * `g:premailer_options['preserve_styles']` Whether to preserve any <tt>link rel=stylesheet</tt> and <tt>style</tt> elements.  Default is 0.
 * `g:premailer_options['with_html_string']` Whether the `html` param should be treated as a raw string.
 * `g:premailer_options['verbose']` Whether to print errors and warnings to <tt>$stderr</tt>.  Default is 0.
@@ -49,3 +51,4 @@ let g:premailer_options = {
 [4]: https://github.com/kien/cssbaseline.vim
 [5]: https://github.com/kien/premailer.vim
 [6]: https://github.com/alexdunae/premailer
+[7]: http://designtomarkup.com/vim/work-with-external-css-tools#premailer.vim

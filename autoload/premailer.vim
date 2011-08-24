@@ -11,25 +11,33 @@ set cpo&vim
 
 " ==== Options
 " [+line_length+] Line length used by to_plain_text. Boolean, default is 65.
-" [+link_query_string+] A string to append to every <tt>a href=""</tt> link. Do not include the initial <tt>?</tt>.
+" [+link_query_string+] A string to append to every <tt>a href=""</tt> link.
+"     Do not include the initial <tt>?</tt>.
 " [+base_url+] Used to calculate absolute URLs for local files.
 " [+css+] Manually specify a CSS stylesheet.
-" [+css_to_attributes+] Copy related CSS attributes into HTML attributes (e.g. +background-color+ to +bgcolor+)
+" [+css_to_attributes+] Copy related CSS attributes into HTML attributes
+"     (e.g. +background-color+ to +bgcolor+)
 " [+css_string+] Pass CSS as a string
-" [+remove_ids+] Remove ID attributes whenever possible and convert IDs used as anchors to hashed to avoid collisions in webmail programs.  Default is 0.
+" [+remove_ids+] Remove ID attributes whenever possible and convert IDs used
+"     as anchors to hashed to avoid collisions in webmail programs.
+"     Default is 0.
 " [+remove_classes+] Remove class attributes. Default is 0.
 " [+remove_comments+] Remove html comments. Default is 0.
-" [+preserve_styles+] Whether to preserve any <tt>link rel=stylesheet</tt> and <tt>style</tt> elements.  Default is 0.
-" [+with_html_string+] Whether the +html+ param should be treated as a raw string.
-" [+verbose+] Whether to print errors and warnings to <tt>$stderr</tt>.  Default is 0.
+" [+preserve_styles+] Whether to preserve any <tt>link rel=stylesheet</tt>
+"     and <tt>style</tt> elements.  Default is 0.
+" [+with_html_string+] Whether the +html+ param should be treated as a raw
+"     string.
+" [+verbose+] Whether to print errors and warnings to <tt>$stderr</tt>.
+"     Default is 0.
+
 if !exists('g:premailer_options')
 	let s:premopt = {
 				\ 'line_length': 65,
 				\ 'link_query_string': '',
 				\ 'base_url': '',
-				\ 'remove_classes': 0,
-				\ 'remove_ids': 0,
-				\ 'remove_comments': 0,
+				\ 'remove_classes': 1,
+				\ 'remove_ids': 1,
+				\ 'remove_comments': 1,
 				\ 'css': [],
 				\ 'css_to_attributes': 1,
 				\ 'with_html_string': 0,
@@ -86,20 +94,21 @@ ruby << EOF
 		require 'rubygems'
 		require 'premailer'
 		$premailer = Premailer.new(
-			get_string('htmlfile'),
-			:warn_level => Premailer::Warnings::SAFE,
-			:line_length => get_number('line_length'),
+			get_string('htmlfile'), {
+			:warn_level        => Premailer::Warnings::SAFE,
+			:line_length       => get_number('line_length'),
 			:link_query_string => get_string('link_query_string'),
-			:base_url => get_string('base_url'),
-			:remove_classes => get_bool('remove_classes'),
-			:remove_ids => get_bool('remove_ids'),
-			:remove_comments => get_bool('remove_comments'),
-			:css => get_array('css'),
+			:base_url          => get_string('base_url'),
+			:remove_classes    => get_bool('remove_classes'),
+			:remove_ids        => get_bool('remove_ids'),
+			:remove_comments   => get_bool('remove_comments'),
+			:css               => get_array('css'),
 			:css_to_attributes => get_bool('css_to_attributes'),
-			:with_html_string => get_bool('with_html_string'),
-			:css_string => get_string('css_string'),
-			:preserve_styles => get_bool('preserve_styles'),
-			:verbose => get_bool('verbose'),
+			:with_html_string  => get_bool('with_html_string'),
+			:css_string        => get_string('css_string'),
+			:preserve_styles   => get_bool('preserve_styles'),
+			:verbose           => get_bool('verbose'),
+			}
 		)
 	end
 
@@ -162,6 +171,14 @@ ruby << EOF
 		init
 		css_warns
 EOF
+	endif
+
+	if filereadable(outhtml)
+		exe 'sil! to vne '.outhtml
+	endif
+
+	if filereadable(outtxt)
+		exe 'sil! to vne '.outtxt
 	endif
 
 endfunc
