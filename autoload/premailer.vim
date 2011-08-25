@@ -50,6 +50,17 @@ else
 	unlet g:premailer_options
 endif
 
+func! s:openinsplit(file)
+	windo
+				\ if a:file =~? bufname('%')
+				\ | e!
+				\ | let found = 1
+				\ | endif
+	if !exists('found')
+		exe 'sil! to vne '.a:file
+	endif
+endfunc
+
 func! premailer#init(...)
 
 	if !executable('ruby') || !executable('gem') || !executable('premailer')
@@ -174,11 +185,11 @@ EOF
 	endif
 
 	if filereadable(outhtml)
-		exe 'sil! to vne '.outhtml
+		sil! cal s:openinsplit(outhtml)
 	endif
 
 	if filereadable(outtxt)
-		exe 'sil! to vne '.outtxt
+		sil! cal s:openinsplit(outtxt)
 	endif
 
 endfunc

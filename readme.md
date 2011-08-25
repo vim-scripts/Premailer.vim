@@ -1,4 +1,4 @@
-[Homepage][8]
+[Homepage][7]
 
 Requires Vim 7.3+ built with +ruby/dyn, Ruby and [Premailer][6].
 
